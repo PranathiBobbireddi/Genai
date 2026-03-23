@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriAssist | Smart Farming Assistant</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="navbar">
+        <div class="logo-section">
+            <i class="fa-solid fa-leaf logo-icon"></i>
+            <div>
+                <h1 class="logo-title">AgriAssist</h1>
+                <p class="tagline" id="tagline-text">Your Smart Farming Assistant</p>
+            </div>
+        </div>
+        
+        <nav class="nav-links">
+            <a href="#" class="nav-btn active" data-target="home-section" data-i18n="nav-home">Home</a>
+            <a href="#" class="nav-btn" data-target="dashboard-section" data-i18n="nav-dash">Dashboard</a>
+            <a href="#" class="nav-btn" data-target="about-section" data-i18n="nav-about">About</a>
+        </nav>
+
+        <div class="nav-controls">
+            <span id="user-greeting" style="margin-right: 1rem; font-size: 0.95rem; font-weight: 600; color: var(--primary-color);"></span>
+            <!-- Language Switch -->
+            <button id="lang-switch" class="btn-icon" title="Switch Language (ENG/TEL)">
+                <i class="fa-solid fa-language"></i> <span id="lang-text">ENG</span>
+            </button>
+            <!-- Dark Mode Toggle -->
+            <button id="theme-toggle" class="btn-icon" title="Toggle Dark Mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <!-- Mobile Menu Toggle -->
+            <button id="logout-btn" class="btn-secondary btn-small" title="Logout" style="border-color: var(--danger-color); color: var(--danger-color); margin-right: 0.5rem;">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </button>
+            <button class="btn-icon mobile-menu-btn" title="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <main id="home-section" class="page-section active" style="padding: 3rem 2rem; max-width: 1200px; margin: 0 auto; text-align: center; flex: 1;">
+        <div class="hero" style="background: var(--surface-color); padding: 4rem 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--border-color);">
+            <i class="fa-solid fa-leaf" style="font-size: 4rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h2 style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem;" data-i18n="hero-title">Welcome to AgriAssist</h2>
+            <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;" data-i18n="hero-desc">Your multilingual AI companion for smart farming. Get real-time advice on crops, fertilizers, pest control, and government schemes.</p>
+            <button id="go-to-dashboard-btn" class="btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;" data-i18n="hero-btn">
+                Go to Dashboard <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+        
+        <div class="features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
+            <div class="card" style="text-align: left;">
+                <i class="fa-solid fa-language" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                <h3 data-i18n="feat1-title">Multilingual Support</h3>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem;" data-i18n="feat1-desc">Communicate in English or Telugu effortlessly with a simple switch.</p>
+            </div>
+            <div class="card" style="text-align: left;">
+                <i class="fa-solid fa-robot" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                <h3 data-i18n="feat2-title">AI-Powered Chat</h3>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem;" data-i18n="feat2-desc">Ask anything related to agriculture and get instant, reliable answers.</p>
+            </div>
+            <div class="card" style="text-align: left;">
+                <i class="fa-solid fa-seedling" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                <h3 data-i18n="feat3-title">Personalized Context</h3>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem;" data-i18n="feat3-desc">Save your farm details to get tailored advice for your specific crops and soil.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Main Dashboard -->
+    <main id="dashboard-section" class="dashboard-container page-section hidden">
+
+        <!-- Left Panel: Context & Insights -->
+        <aside class="left-panel">
+            <!-- Context Section -->
+            <section class="card context-card">
+                <h2 data-i18n="ctx-title"><i class="fa-solid fa-seedling"></i> Farm Context</h2>
+                <form id="context-form">
+                    <div class="input-group">
+                        <label for="crop-type" data-i18n="ctx-crop">Crop Type</label>
+                        <select id="crop-type" required>
+                            <option value="" disabled selected data-i18n="opt-crop-sel">Select crop...</option>
+                            <option value="rice" data-i18n="opt-crop-rice">Rice (Paddy)</option>
+                            <option value="wheat" data-i18n="opt-crop-wheat">Wheat</option>
+                            <option value="cotton" data-i18n="opt-crop-cotton">Cotton</option>
+                            <option value="sugarcane" data-i18n="opt-crop-sugar">Sugarcane</option>
+                            <option value="maize" data-i18n="opt-crop-maize">Maize</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="location" data-i18n="ctx-loc">Location</label>
+                        <input type="text" id="location" placeholder="e.g., Andhra Pradesh" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="season" data-i18n="ctx-season">Season</label>
+                        <select id="season" required>
+                            <option value="" disabled selected data-i18n="opt-sea-sel">Select season...</option>
+                            <option value="kharif" data-i18n="opt-sea-khari">Kharif (Monsoon)</option>
+                            <option value="rabi" data-i18n="opt-sea-rabi">Rabi (Winter)</option>
+                            <option value="zaid" data-i18n="opt-sea-zaid">Zaid (Summer)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="soil" data-i18n="ctx-soil">Soil Condition (Optional)</label>
+                        <select id="soil">
+                            <option value="" disabled selected data-i18n="opt-soil-sel">Select soil type...</option>
+                            <option value="alluvial" data-i18n="opt-soil-alluv">Alluvial</option>
+                            <option value="black" data-i18n="opt-soil-black">Black / Regur</option>
+                            <option value="red" data-i18n="opt-soil-red">Red / Yellow</option>
+                            <option value="laterite" data-i18n="opt-soil-later">Laterite</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-primary w-full" data-i18n="ctx-btn">Save Context</button>
+                </form>
+
+                <div id="profile-summary" class="profile-summary hidden">
+                    <h3><span data-i18n="ctx-title">Active Profile</span> <i class="fa-solid fa-check-circle text-success"></i></h3>
+                    <p id="summary-text"></p>
+                    <button id="edit-context" class="btn-secondary btn-small" data-i18n="ctx-edit">Edit Profile</button>
+                </div>
+            </section>
+
+            <!-- Knowledge Insights Section -->
+            <section class="insights">
+                <h2 data-i18n="ins-title"><i class="fa-solid fa-lightbulb"></i> Insights</h2>
+                <div class="insight-cards">
+                    <div class="card insight-card tip-card">
+                        <i class="fa-solid fa-cloud-sun"></i>
+                        <div class="insight-content">
+                            <h4 data-i18n="ins-tip1-title">Weather Tip</h4>
+                            <p data-i18n="ins-tip1-desc">Good time to sow seeds; clear skies expected next week.</p>
+                        </div>
+                    </div>
+                    <div class="card insight-card alert-card">
+                        <i class="fa-solid fa-bug"></i>
+                        <div class="insight-content">
+                            <h4 data-i18n="ins-tip2-title">Pest Alert</h4>
+                            <p data-i18n="ins-tip2-desc">High risk of Stem Borer detected in your region.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+        <!-- Right Panel: Chat Interface -->
+        <section class="right-panel">
+            <div class="chat-container card">
+                
+                <!-- Chat Header -->
+                <div class="chat-header">
+                    <div class="chat-title">
+                        <i class="fa-solid fa-robot bot-icon-large"></i>
+                        <div>
+                            <h2 data-i18n="chat-title">Agri Bot</h2>
+                            <span class="online-status" data-i18n="chat-status">Online</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Messages Area -->
+                <div class="chat-messages" id="chat-messages">
+                    <!-- Welcome Message -->
+                    <div class="message bot">
+                        <div class="bubble">
+                            <p>Hello! I am AgriAssist, your smart farming guide. Ask me about crops, fertilizers, pests, or government schemes.</p>
+                            <span class="timestamp">Just now</span>
+                        </div>
+                    </div>
+                    <!-- Messages will be injected here via JS -->
+                </div>
+
+                <!-- Typing indicator -->
+                <div id="typing-indicator" class="typing-indicator hidden">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <!-- Chat Input Area -->
+                <div class="chat-input-area">
+                    <form id="chat-form">
+                        <button type="button" class="btn-icon" title="Attach image (e.g., infected leaf)">
+                            <i class="fa-solid fa-paperclip"></i>
+                        </button>
+                        <input type="text" id="chat-input" placeholder="Ask about crops, fertilizers, pests, or schemes..." autocomplete="off">
+                        <button type="button" class="btn-icon voice-btn" title="Voice Input">
+                            <i class="fa-solid fa-microphone"></i>
+                        </button>
+                        <button type="submit" class="btn-primary send-btn" title="Send Message">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- About Section -->
+    <main id="about-section" class="page-section hidden" style="padding: 3rem 2rem; max-width: 800px; margin: 0 auto; flex: 1;">
+        <div class="card" style="padding: 3rem;">
+            <h2 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;" data-i18n="about-title"><i class="fa-solid fa-circle-info"></i> About AgriAssist</h2>
+            
+            <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;" data-i18n="about-desc1">
+                AgriAssist is an innovative Multilingual GenAI Chatbot specifically designed for farmers. Our goal is to bridge the information gap by providing a smart, easy-to-use, and localized assistant that understands regional agricultural contexts.
+            </p>
+
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-primary);" data-i18n="about-mission-title">Our Mission</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;" data-i18n="about-mission-desc">
+                To empower farmers with modern technology, helping them make informed decisions about crop management, soil health, pest control, and market trends, thereby increasing yield and sustainability.
+            </p>
+
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-primary);" data-i18n="about-feat-title">Key Features</h3>
+            <ul style="list-style-type: none; margin-left: 0; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                <li data-i18n="about-f1"><i class="fa-solid fa-check text-success" style="margin-right: 0.5rem;"></i> Context-Aware Responses</li>
+                <li data-i18n="about-f2"><i class="fa-solid fa-check text-success" style="margin-right: 0.5rem;"></i> Multi-Language Support</li>
+                <li data-i18n="about-f3"><i class="fa-solid fa-check text-success" style="margin-right: 0.5rem;"></i> Real-Time Explainability</li>
+                <li data-i18n="about-f4"><i class="fa-solid fa-check text-success" style="margin-right: 0.5rem;"></i> Smart Visual Interface</li>
+            </ul>
+            
+            <div style="background: var(--bg-color); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--primary-color);">
+                <p style="font-weight: 600; color: var(--text-primary);" data-i18n="about-footer">Developed with <i class="fa-solid fa-heart" style="color: var(--danger-color);"></i> for Agriculture.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p><strong>AgriAssist Project</strong> | Built for Indian Farmers <i class="fa-solid fa-tractor"></i></p>
+            <div class="footer-links">
+                <a href="#" class="nav-btn" data-target="about-section" data-i18n="nav-about">About</a> | <a href="#">Contact Us</a> | <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+</body>
+</html>
